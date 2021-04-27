@@ -21,7 +21,7 @@ const CreateBook = () => {
    * @param value field value
    * @param field field name
    */
-  const updateForm = (value: string, field: string) => {
+   const updateForm = (value: string, field: string) => {
     let newValue: any = { ...formData };
     newValue[field] = value;
     setFormData(newValue);
