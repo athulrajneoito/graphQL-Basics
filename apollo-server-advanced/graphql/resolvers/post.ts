@@ -1,13 +1,15 @@
 
 
 
+
+
 export const post = {
     Query: {
         getAllPosts: (_parent: any, _args: any, { Post }: any) => Post.find({}),
         getPostId: async (_parent: any, { id }: any, { Post }: any): Promise<any> => await Post.findById(id)
     },
     Mutation: {
-        createNewPost: async (_parent: any, { newPost }: any, { Post }: any): Promise<any> => {
+        createNewPost: async (_parent: any, { newPost }: any, { Post }:any ): Promise<any> => {
             const result = await Post.create(newPost);
             return result;
         },

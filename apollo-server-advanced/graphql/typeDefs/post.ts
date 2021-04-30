@@ -2,7 +2,7 @@ import { gql } from "apollo-server";
 
 
 export const post = gql`
-
+    directive @isAuth on FIELD_DEFINITION
     type Post{
         id:ID
         title:String!,
@@ -24,13 +24,13 @@ export const post = gql`
         featuredImage:String
     }
     extend type Query{
-        getAllPosts:[Post] ,
+        getAllPosts:[Post] 
         getPostId(id:ID!):Post!
     }
     extend type Mutation {
-        createNewPost(newPost:NewPost):Post,
-        editPost(editPost:EditPost,id:ID!):Post,
-        deletePost(id:ID!):DeleteResponse!
+        createNewPost(newPost:NewPost):Post @isAuth,
+        editPost(editPost:EditPost,id:ID!):Post @isAuth,
+        deletePost(id:ID!):DeleteResponse! @isAuth,
     }
 
 `;
