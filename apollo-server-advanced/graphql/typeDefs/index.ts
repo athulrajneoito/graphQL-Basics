@@ -1,8 +1,8 @@
 import { user } from "./user";
 import { post } from './post';
-import {typeDefs} from './typeDefs';
+import baseDef from './typeDefs';
 
 
 export default [
-    typeDefs ,post,user
+    baseDef, post, user
 ]

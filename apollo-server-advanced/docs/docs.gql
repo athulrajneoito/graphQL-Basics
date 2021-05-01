@@ -1,0 +1,103 @@
+directive @isAuth on FIELD_DEFINITION
+
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+
+type Book {
+  id: ID!
+  name: String!
+  genre: String
+  authorId: String!
+  author: Author
+}
+
+type Author {
+  id: ID!
+  name: String!
+  age: String
+  books: [Book]
+}
+
+type Query {
+  books: [Book]
+  authors: [Author]
+  getAllPosts: [Post]
+  getPostId(id: ID!): Post!
+  getUserById(id: ID!): User!
+  loginUser(loginUser: LoginInput): LoginResponse!
+}
+
+type Mutation {
+  addBook(name: String, genre: String, authorId: ID): Book
+  changeName(id: ID, name: String): Book
+  createNewPost(newPost: NewPost): Post
+  editPost(editPost: EditPost, id: ID!): Post
+  deletePost(id: ID!): DeleteResponse!
+  registerUser(newUser: UserInput!): AuthResponse!
+}
+
+type Post {
+  id: ID
+  title: String!
+  content: String!
+  featuredImage: String
+  author: User
+}
+
+type DeleteResponse {
+  id: ID!
+  message: String
+}
+
+input NewPost {
+  title: String!
+  content: String!
+  featuredImage: String
+}
+
+input EditPost {
+  title: String
+  content: String
+  featuredImage: String
+}
+
+type User {
+  id: ID!
+  name: String
+  username: String!
+  email: String!
+  profileImage: String
+}
+
+input UserInput {
+  name: String
+  username: String!
+  password: String!
+  email: String!
+  profileImage: String
+}
+
+type AuthResponse {
+  user: User
+  message: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+type LoginResponse {
+  user: User!
+  token: String!
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+# The `Upload` scalar type represents a file upload.
+scalar Upload

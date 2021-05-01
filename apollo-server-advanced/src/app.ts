@@ -8,7 +8,7 @@ import * as appModels from '../models';
 import { authMidddleware } from '../middlewares/auth';
 import { RequestCustom } from '../interfaces';
 
-
+// PORT
 const PORT = process.env.port || 4000;
 
 
@@ -17,8 +17,11 @@ const app = express();
 
 // establishing database connection
 require('../db/mongoose');
+
+// Adding auth Middleware
 app.use(authMidddleware);
 
+// Initialize Apollo Server
 const server = new ApolloServer({
     typeDefs, resolvers, schemaDirectives, context: ({ req }) => {
 
